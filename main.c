@@ -1,6 +1,5 @@
 #include "server.h"
 
-#define BUFFER_SIZE 1024
 
 
 int main() {
@@ -8,13 +7,15 @@ int main() {
     int server_fd = init_server(8080);
     char buffer[BUFFER_SIZE];
 
+    
+
     // Server Run
     while(1) {
+
         int client_fd = accept(server_fd, NULL, NULL);
         printf("Client Connectted\n");
-        
+
         while(1) {
-    
             int bytes_recv = recv(client_fd, buffer, BUFFER_SIZE-1, 0);
     
             if(bytes_recv > 0) {
@@ -30,15 +31,9 @@ int main() {
                 break;
             }
         }
-
         close(client_fd);
 
     }
-
-    
-
-
-
 
     return 0;
 }
